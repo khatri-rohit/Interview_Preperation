@@ -1,5 +1,6 @@
+// package Javas;
 class Welcome {
     public static void main(String args[]) {
-        System.out.println("Hello World");
+        System.out.printf("%d\n", 1);
     }
 }
