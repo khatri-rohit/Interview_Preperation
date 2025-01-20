@@ -2,7 +2,7 @@
 
 public class ArrangeString {
     public static void main(String args[]) {
-        String str = "Banana";
+        String str = "AaabbBccCddeea?";
         String arr[] = new String[127];
         for (int i = 0; i < str.length(); i++) {
             for (int j = 0; j < arr.length; j++) {
@@ -13,6 +13,7 @@ public class ArrangeString {
                 }
             }
         }
+
         for (String string : arr) {
             if (string != null)
                 System.out.println(string);
