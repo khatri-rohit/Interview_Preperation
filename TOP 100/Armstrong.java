@@ -29,5 +29,6 @@ class Armstrong {
         for (int i = 1; i <= arm; i++) {
             armStrong(i);
         }
+        System.out.println();
     }
 }
