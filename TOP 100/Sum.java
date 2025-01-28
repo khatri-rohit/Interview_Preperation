@@ -1,20 +1,26 @@
-
 // package TOP 100;
-import java.lang.Runtime;
 
 public class Sum {
 
-    static int getSum(int n) {
+    public static int getSum(int n) {
         if (n == 0)
             return 0;
 
         return n + getSum(n - 1);
     }
 
+    public static int getSquareSum(int n) {
+        int sqrtSum = 0;
+        for (int i = 1; i <= n; i++) {
+            sqrtSum += Math.pow(i, 2);
+        }
+        return sqrtSum;
+    }
+
     public static void main(String args[]) {
-        int n = 11;
-        if (getSum(n) == 55)
-            System.out.println(getSum(n));
-        Runtime.getRuntime().exit(n);
+        int n = 3;
+        System.out.println(getSum(n));
+        System.out.println(getSquareSum(n));
+
     }
 }
