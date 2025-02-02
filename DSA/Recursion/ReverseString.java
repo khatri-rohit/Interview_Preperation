@@ -100,6 +100,23 @@ public class ReverseString {
         }
     }
 
+    static int count1 = 0;
+
+    public static void permutations(String str, int index, String newString, int len) {
+        if (index == str.length()) {
+            return;
+        }
+        if (count1 == len) {
+            return;
+        }
+        char tmp = str.charAt(index);
+        newString += tmp;
+        permutations(str, index + 1, newString, len);
+        System.out.println(newString);
+        permutations(str, index, newString, len);
+        count1++;
+    }
+
     public static void main(String[] args) {
 
         // String rev = "abcd"; // Reverse String
@@ -120,8 +137,10 @@ public class ReverseString {
         // boolean map[] = new boolean[26];
         // System.out.println(removeDuplicate(str, newString, 0, map));
 
-        String str = "23";
-        printComb(str, 0, "");
+        // String str = "23";
+        // printComb(str, 0, "");
 
+        String str = "abc";
+        permutations(str, 0, "", ((str.length() - 1) * str.length()));
     }
 }
