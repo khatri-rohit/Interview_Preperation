@@ -22,6 +22,8 @@ public class Main {
 
         Rohit obj = new Rohit();
         System.out.println("Hello Main!! " + obj.name);
+        System.out.println(main instanceof Main);
+
         /*
          * int arr[] = { 1, 2 };
          * main(arr); // int arr
@@ -31,7 +33,7 @@ public class Main {
     }
 }
 
-class Surname{
+class Surname {
     String surname = "Khatri";
 }
 
@@ -39,7 +41,7 @@ class Rohit extends Surname {
     String name = "Rohit" + surname; // Inherited SUrname form Parent class
 
     public static void main(String[] args) {
-            
-        System.out.println("Hello Class Rohit");
+        short n = (short) 45356;
+        System.out.println("Hello Class Rohit\n" + n + " short number");
     }
 }
