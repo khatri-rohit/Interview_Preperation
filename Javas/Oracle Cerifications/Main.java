@@ -45,3 +45,36 @@ class Rohit extends Surname {
         System.out.println("Hello Class Rohit\n" + n + " short number");
     }
 }
+
+// abstract class Animal {
+//     abstract public void walk();
+
+//     public void eat() {
+
+//     }
+// }
+
+class Horse implements Animal {
+    public void walk() {
+        System.out.println("Walk on 4 legs");
+    }
+}
+
+// class Chicken extends Animal {
+class Chicken implements Animal {
+    public void walk() {
+        System.out.println("Walk on 2 legs");
+    }
+}
+
+interface Animal{
+    void walk();
+}
+
+class OOPS {
+    public static void main(String[] args) {
+        Horse hourse = new Horse();
+        hourse.walk();
+        
+    }
+}
