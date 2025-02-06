@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
-import Main1 from './components/Main1.jsx';
+// import Main1 from './components/Main1.jsx';
+import { BrowserRouter, Routes, Route, NavLink, Outlet } from 'react-router-dom';
 import './App.css'
+import Home from './components/Home';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
   const obj = { name: "Rohit", surname: "Kharti" };
   // const arr = [1, 2, 3];
   // const obj1 = [...obj];
@@ -18,21 +20,35 @@ function App() {
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-        <Main1 obj={obj} />
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* <Nav /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Nav />}>
+            <Route index element={<Home />} />
+            <Route path='/about' element={<h1>Hello About</h1>} />
+            <Route path='/contact' element={<h1>Say Hello to me at this mail <a href="mailto:rohitkhatri.dev@gmail.com">Gmail</a></h1>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
 
 export default App
+
+
+function Nav() {
+  return (
+    <>
+      <nav>
+        <NavLink to='/'>Home</NavLink>
+        <NavLink to='/about'>About</NavLink>
+        <NavLink to='/contact'>Contact</NavLink>
+      </nav>
+      <Outlet />
+      <footer>
+        Design and Created By .rohitkhatri
+      </footer>
+    </>
+  )
+}
