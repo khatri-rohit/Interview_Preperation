@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, NavLink, Outlet } from 'react-router-dom';
 import './App.css'
 import Home from './components/Home';
+import { ContextProvider } from './context/context.jsx';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function App() {
   return (
     <>
       {/* <Nav /> */}
+      {/* <ContextProvider> */}
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Nav />}>
@@ -30,6 +32,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      {/* </ContextProvider> */}
     </>
   )
 }
