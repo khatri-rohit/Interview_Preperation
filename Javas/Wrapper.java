@@ -24,10 +24,12 @@ class Wrapper {
         inValue = 10;
     }
 
+
     public static void main(String[] args) {
         String num = "5";
         Integer num1 = new Integer(num); // Boxing
         // Integer num1 = num; // AutoBoxing
+        Float f = new Float(1); 
         System.out.println(num1);
         System.out.println(inValue);
 
