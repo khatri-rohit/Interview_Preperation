@@ -8,7 +8,7 @@ public class Arraylist {
         ArrayList<Integer> list1 = new ArrayList<>();
         // ArrayList<String> list2 = new ArrayList<>();
         list1.add(0, 12);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i <= 3; i++) {
             // Append in the end
             list1.add(i);
         }
@@ -26,8 +26,10 @@ public class Arraylist {
         list1.set(1, -0); // Replace new value form old
         System.out.println(list1);
 
-        list1.remove(0); // by Index
+        // list1.remove(0); // by Index
         System.out.println(list1);
+
+        System.out.println(list1.indexOf(0));
 
         System.out.println(list1.size());
 
