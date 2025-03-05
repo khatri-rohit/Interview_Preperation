@@ -115,36 +115,82 @@ public class Linked {
     public void getNode(int pos) {
         Node node = head;
         int count = 0;
-        while (node.next != null) {
-            if (count == pos) {
-                System.out.println(node.data);
-                break;
-            } else
-                node = node.next;
+
+        while (count < pos) {
+            node = node.next;
             count++;
         }
+        System.out.println(node.data);
+    }
+
+    public int searchNode(String data) {
+        if (size == 0) {
+            System.out.println("list is Empty");
+            return -1;
+        }
+
+        int index = 0;
+        Node node = head;
+        while (node.next != null) {
+            if (node.data == data) {
+                return index;
+            }
+            node = node.next;
+            index++;
+        }
+
+        return -1;
+    }
+
+    public int recursionSearch(Node head, String data, int index) {
+        if (head.data == data) {
+            return index;
+        }
+
+        if (head.next == null)
+            return -1;
+
+        return recursionSearch(head.next, data, ++index);
     }
 
     public static void main(String args[]) {
         Linked linkedList = new Linked();
 
-        linkedList.addFirst("a");
-        linkedList.addFirst("is");
-        linkedList.addFirst("this");
+        // linkedList.addFirst("a");
+        // linkedList.addFirst("is");
+        // linkedList.addFirst("this");
 
-        linkedList.addLast("linkedList");
+        linkedList.addLast("My");
+        linkedList.addLast("Name");
+        linkedList.addLast("is");
+        linkedList.addLast("Rohit");
+        linkedList.addLast("Khatri");
 
         linkedList.printLinkedList();
         System.out.println(linkedList.size);
 
-        linkedList.insert("new node", 3);
-        linkedList.printLinkedList();
-        System.out.println(linkedList.size);
+        // linkedList.insert("new node", 3);
+        // linkedList.printLinkedList();
+        // System.out.println(linkedList.size);
 
-        linkedList.getNode(1);
+        // linkedList.getNode(1);
         // linkedList.deleteFirst();
         // System.out.println(linkedList.size);
         // linkedList.printLinkedList();
+
+        int pos = linkedList.searchNode("Rohit");
+        if (pos != -1) {
+            System.out.print("Found -> " + pos + " - ");
+            linkedList.getNode(pos);
+        } else
+            System.out.println("Not Found");
+
+        pos = linkedList.recursionSearch(linkedList.head, "Khatri", 0);
+        if (pos != -1) {
+            System.out.print("Found -> " + pos + " - ");
+            linkedList.getNode(pos);
+        } else
+            System.out.println("Not Found");
 
     }
 }
