@@ -31,14 +31,37 @@ public class BinToDec {
         System.out.println(bin);
     }
 
-    public static void binToDec(long num) {
-        long tmp = num;
+    public static int length(long n) {
         int len = 0;
+        long tmp = n;
         for (; tmp > 0; len++, tmp /= 10)
             ;
+        return len;
+    }
+
+    public static void octToDec(long num) {
+        long tmp = num, value = 0;
+        int len = 0;
+
+        while (tmp != 0) {
+            value += (tmp % 10) * (int) Math.pow(8, len);
+            tmp /= 10;
+            len++;
+        }
+        System.out.println(value);
+    }
+
+    public static void binToDec(long num) {
+        long tmp = 0;
+        int len = length(num);
+
         long arr[] = new long[len];
         int index = len - 1;
         while (num != 0) {
+            if (num % 10 > 1) {
+                System.out.println("Not a Binary Number");
+                return;
+            }
             arr[index--] = num % 10;
             num /= 10;
         }
@@ -53,12 +76,16 @@ public class BinToDec {
 
     public static void hexToDec(String num) {
         long dec = 0;
+        int len = num.length() - 1;
         for (int i = 0; i < num.length(); i++) {
-            if (Integer.valueOf(num.charAt(i)) <= 59) {
-                dec += (Integer.valueOf(num.charAt(i) - 48) * Math.pow(16, num.length() - i - 1));
+            if ((Integer.valueOf(num.charAt(i)) - 48) >= 0 && (Integer.valueOf(num.charAt(i)) - 48) <= 9) {
+                int value = Integer.valueOf(num.charAt(i)) - 48;
+                dec += value * (int) Math.pow(16, len);
             } else {
-                dec += (((int) (num.charAt(i)) - 55) * Math.pow(16, num.length() - i - 1));
+                int value = Integer.valueOf(num.charAt(i)) - 55;
+                dec += value * (int) Math.pow(16, len);
             }
+            len--;
         }
         System.out.println(dec);
     }
@@ -66,12 +93,14 @@ public class BinToDec {
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         // long num = in.nextLong();
-        // // binToDec(num);
+        // binToDec(num);
         // decToBin(num);
         // decToHex(num);
+        // octToDec(num);
 
         String num = in.next();
         hexToDec(num);
 
+        in.close();
     }
 }
