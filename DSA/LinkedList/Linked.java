@@ -1,7 +1,9 @@
 // package DSA.LinkedList;
 
 public class Linked {
-    Node head;
+    public static Node head;
+    public static Node tail;
+
     private int size;
 
     class Node {
@@ -153,44 +155,103 @@ public class Linked {
         return recursionSearch(head.next, data, ++index);
     }
 
+    public void reverse() { // O(n)
+        Node prev = null;
+        Node cur = tail = head;
+        Node next;
+
+        while (cur != null) {
+            next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        head = prev;
+    }
+
+    public void removeNth(int pos) {
+        Node node = head;
+        int count = 1;
+        while (count < pos) {
+            node = node.next;
+            count++;
+        }
+
+        node.next = node.next.next;
+        return;
+    }
+
+    public Node findMidNode(Node head) { // Return The Middle Node
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next; // + 1
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    public boolean ispalindrome() {
+        if (head == null || head.next == null)
+            return true;
+        // step - 1 find Middle
+        Node mid = findMidNode(head);
+        // Step - 2 reverse 2nd Half
+        Node prev = null;
+        Node cur = mid;
+        Node next;
+
+        while (cur != null) {
+            next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+
+        // Step - Check left & right half
+        Node right = prev;
+        Node left = head;
+
+        while (right != null) {
+            if (left.data != right.data)
+                return false;
+            left = left.next;
+            right = right.next;
+        }
+
+        return true;
+    }
+
     public static void main(String args[]) {
-        Linked linkedList = new Linked();
+        Linked ll = new Linked();
 
-        // linkedList.addFirst("a");
-        // linkedList.addFirst("is");
-        // linkedList.addFirst("this");
+        ll.addLast("1");
+        ll.addLast("2");
+        ll.addLast("2");
+        ll.addLast("1");
 
-        linkedList.addLast("My");
-        linkedList.addLast("Name");
-        linkedList.addLast("is");
-        linkedList.addLast("Rohit");
-        linkedList.addLast("Khatri");
+        ll.printLinkedList();
 
-        linkedList.printLinkedList();
-        System.out.println(linkedList.size);
-
-        // linkedList.insert("new node", 3);
-        // linkedList.printLinkedList();
-        // System.out.println(linkedList.size);
-
-        // linkedList.getNode(1);
-        // linkedList.deleteFirst();
-        // System.out.println(linkedList.size);
-        // linkedList.printLinkedList();
-
-        int pos = linkedList.searchNode("Rohit");
+        int pos = ll.searchNode("Rohit");
         if (pos != -1) {
             System.out.print("Found -> " + pos + " - ");
-            linkedList.getNode(pos);
+            ll.getNode(pos);
         } else
             System.out.println("Not Found");
 
-        pos = linkedList.recursionSearch(linkedList.head, "Khatri", 0);
+        pos = ll.recursionSearch(head, "Khatri", 0);
         if (pos != -1) {
             System.out.print("Found -> " + pos + " - ");
-            linkedList.getNode(pos);
-        } else
+            ll.getNode(pos);
+        } else {
             System.out.println("Not Found");
+        }
 
+        // ll.reverse();
+        ll.removeNth(2); // Delete by Index
+        ll.printLinkedList();
+        System.out.println(ll.ispalindrome());
     }
 }
