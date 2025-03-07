@@ -90,16 +90,30 @@ public class BinToDec {
         System.out.println(dec);
     }
 
+    public static void decToOct(long num){
+        long dec = num, oct = 0l;
+        int x = 1;
+        while (dec > 0) {
+            oct += (dec % 8) * x;
+            dec /= 8;
+            x*=10;
+        }
+        System.out.println(oct);
+    }
+
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
-        // long num = in.nextLong();
-        // binToDec(num);
+        long num = in.nextLong();
         // decToBin(num);
-        // decToHex(num);
-        // octToDec(num);
+        // binToDec(num);
 
-        String num = in.next();
-        hexToDec(num);
+        // String num = in.next();
+        // decToHex(num);
+        // hexToDec(num);
+
+
+        // decToOct(num);
+        // octToDec(num);
 
         in.close();
     }

@@ -270,8 +270,6 @@ public class Linked {
         System.out.println(ll.ispalindrome());
 
         // Detect if a LinkedList has Cycle or not
-        head = new Node("1");
-        head.next = new Node("2")
         System.out.println(ll.detectCycle());
     }
 }
