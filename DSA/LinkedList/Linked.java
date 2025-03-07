@@ -196,8 +196,10 @@ public class Linked {
     public boolean ispalindrome() {
         if (head == null || head.next == null)
             return true;
+
         // step - 1 find Middle
         Node mid = findMidNode(head);
+
         // Step - 2 reverse 2nd Half
         Node prev = null;
         Node cur = mid;
@@ -222,6 +224,19 @@ public class Linked {
         }
 
         return true;
+    }
+
+    public boolean detectCycle() {
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast)
+                return true;
+        }
+        return false;
     }
 
     public static void main(String args[]) {
@@ -250,8 +265,13 @@ public class Linked {
         }
 
         // ll.reverse();
-        ll.removeNth(2); // Delete by Index
+        // ll.removeNth(2); // Delete by Index
         ll.printLinkedList();
         System.out.println(ll.ispalindrome());
+
+        // Detect if a LinkedList has Cycle or not
+        head = new Node("1");
+        head.next = new Node("2")
+        System.out.println(ll.detectCycle());
     }
 }
