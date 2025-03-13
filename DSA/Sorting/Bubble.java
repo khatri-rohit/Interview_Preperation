@@ -96,6 +96,34 @@ public class Bubble {
         }
     }
 
+    public static void quickSort(int arr[], int st, int ed) {
+        if (st >= ed)
+            return;
+        // Pivot
+        int pindex = partition(arr, st, ed);
+        quickSort(arr, st, pindex - 1);
+        quickSort(arr, pindex + 1, ed);
+    }
+
+    public static int partition(int arr[], int st, int ed) {
+        int pivot = arr[ed];
+        int i = st - 1;
+
+        for (int j = st; j < ed; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                int tmp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = tmp;
+            }
+        }
+        i++;
+        int tmp = pivot;
+        arr[ed] = arr[i];
+        arr[i] = tmp;
+        return i;
+    }
+
     public static void main(String args[]) {
         // int arr[] = { 2, 3, 4, 6, 8, 1, 7, 5 };
         // int arr[] = { 1, 4, 1, 3, 2, 4, 3, 7 };
@@ -113,7 +141,8 @@ public class Bubble {
         // selectionSort(arr);
         // insertionSort(arr);
         // countingSort(arr);
-        mergeSort(arr3, 0, arr3.length - 1);
+        // mergeSort(arr3, 0, arr3.length - 1);
+        quickSort(arr3, 0, arr3.length - 1);
         for (int i : arr3)
             System.out.print(i + " ");
 
