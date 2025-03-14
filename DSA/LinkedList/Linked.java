@@ -13,13 +13,11 @@ public class Linked {
         Node(String data) {
             this.data = data;
             this.next = null;
-
         }
     }
 
     public void addFirst(String data) {
         Node newNode = new Node(data);
-
         size++;
         if (head == null) {
             head = newNode;
@@ -184,6 +182,7 @@ public class Linked {
     public Node findMidNode(Node head) { // Return The Middle Node
         Node slow = head;
         Node fast = head;
+        // Node fast = head.next; // To get the mid which is the last of left half (first half)
 
         while (fast != null && fast.next != null) {
             slow = slow.next; // + 1
