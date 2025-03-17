@@ -41,6 +41,36 @@ public class RecursionProblems {
         return true;
     }
 
+    public static int largestArr(int arr[]) {
+        int larg = Integer.MIN_VALUE;
+        for (int i : arr) {
+            if (i > larg) {
+                larg = i;
+            }
+        }
+        return larg;
+    }
+
+    public static int smallestArr(int arr[]) {
+        int small = Integer.MAX_VALUE;
+        for (int i : arr) {
+            if (i < small) {
+                small = i;
+            }
+        }
+        return small;
+    }
+
+    public static void reversingNum(int num){
+
+        int rev = 0; // 123
+        while (num != 0) {
+            rev = (rev * 10) + (num % 10);
+            num /= 10;
+        }
+        System.out.println(rev);
+    }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
@@ -54,9 +84,17 @@ public class RecursionProblems {
         // pow = fastPow(value, power);
         // System.out.println(pow);
 
-        int prime = in.nextInt();
-        boolean isPrime = isPrime(prime);
-        System.out.println(isPrime);
+        // int prime = in.nextInt();
+        // boolean isPrime = isPrime(prime);
+        // System.out.println(isPrime);
+
+        // int arr[] = { 2, 4, -3, 70, 14, 85, 12, 547, 8512, 958, 412, 0 };
+        // System.out.println(largestArr(arr));
+        // System.out.println(smallestArr(arr));
+
+        int num = in.nextInt();
+        reversingNum(num);
+
 
         in.close();
     }
