@@ -104,29 +104,89 @@ public class Questions {
       }
    }
 
+   private Node getMidNode(Node head) {
+      Node slow = head;
+      Node fast = head.next; // For MergeSort, ZigZag right node mid
+      // Node fast = head; // For Palindrome left node mid
+
+      while (fast != null && fast.next != null) {
+         slow = slow.next;
+         fast = fast.next.next;
+      }
+
+      return slow;
+   }
+
+   private Node merge(Node head1, Node head2) {
+      Node mergeNode = new Node(-1);
+      Node tmp = mergeNode;
+
+      while (head1 != null && head2 != null) {
+         // if (head1.data <= head2.data) {
+         if (head1.data % 2 == 0) {
+            tmp.next = head1;
+            head1 = head1.next;
+            tmp = tmp.next;
+         } else {
+            tmp.next = head2;
+            head2 = head2.next;
+            tmp = tmp.next;
+         }
+      }
+
+      while (head1 != null) {
+         tmp.next = head1;
+         head1 = head1.next;
+         tmp = tmp.next;
+      }
+      while (head2 != null) {
+         tmp.next = head2;
+         head2 = head2.next;
+         tmp = tmp.next;
+      }
+
+      return mergeNode.next;
+   }
+
+   public Node mergeSort(Node head) {
+      if (head == null || head.next == null) {
+         return head;
+      }
+
+      Node mid = getMidNode(head);
+
+      Node rightHead = mid.next;
+      mid.next = null;
+      Node newLeft = mergeSort(head);
+      Node newRight = mergeSort(rightHead);
+
+      return merge(newLeft, newRight);
+   }
+
    public static void main(String[] args) {
       Questions ll1 = new Questions();
       Questions ll2 = new Questions();
 
+      ll1.addLast(7);
       ll1.addLast(1);
       ll1.addLast(2);
+      ll1.addLast(9);
       ll1.addLast(3);
-      ll1.addLast(4);
       ll1.addLast(5);
       ll1.addLast(6);
-      ll1.addLast(7);
       ll1.addLast(8);
-      ll1.addLast(9);
       ll1.addLast(10);
+      ll1.addLast(4);
       ll1.println();
 
-      // Question 3
-      ll1
-      
+      // Question 4
+      ll1.head = ll1.mergeSort(ll1.head);
+      ll1.println();
+
       // // Question2
       // ll1.deleteNs(3, 2);
       // ll1.println();
-      
+
       // // Question 1
       // ll2.addLast(4);
       // ll2.addLast(5);
