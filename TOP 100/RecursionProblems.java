@@ -24,31 +24,37 @@ public class RecursionProblems {
             return val * temp * temp;
     }
 
-    public static boolean isPrime(int prime) {
-        if (prime == 2)
+    public static boolean isPrime(int prime, int tmp) {
+        if (prime == tmp)
             return true;
         if (prime < 2)
             return false;
 
-        int tmp = prime;
-        while (prime > 2) {
-            prime--;
-            if (tmp % prime == 0) {
-                return false;
-            }
-        }
+        if (prime % tmp == 0)
+            return false;
 
-        return true;
+        int temp = tmp + 1;
+        return isPrime(prime, temp);
     }
 
-    public static int largestArr(int arr[]) {
-        int larg = Integer.MIN_VALUE;
-        for (int i : arr) {
-            if (i > larg) {
-                larg = i;
-            }
-        }
-        return larg;
+    public static int largestArr(int arr[], int index, int max) {
+        int idx = index;
+
+        if (arr[index] > max)
+            max = arr[index];
+
+        if (idx == arr.length - 1)
+            return max;
+        idx++;
+        return largestArr(arr, idx, max);
+
+        // int larg = Integer.MIN_VALUE;
+        // for (int i : arr) {
+        // if (i > larg) {
+        // larg = i;
+        // }
+        // }
+        // return larg;
     }
 
     public static int smallestArr(int arr[]) {
@@ -61,14 +67,19 @@ public class RecursionProblems {
         return small;
     }
 
-    public static void reversingNum(int num){
+    public static int reversingNum(int num) {
+        if (num == 0)
+            return 0;
+        
+        int res = reversingNum(num % 10);
 
-        int rev = 0; // 123
-        while (num != 0) {
-            rev = (rev * 10) + (num % 10);
-            num /= 10;
-        }
-        System.out.println(rev);
+        // int rev = 0; // 123
+        // while (num != 0) {
+        // rev = (rev * 10) + (num % 10);
+        // num /= 10;
+        // }
+        // System.out.println(rev);
+
     }
 
     public static void main(String[] args) {
@@ -85,16 +96,15 @@ public class RecursionProblems {
         // System.out.println(pow);
 
         // int prime = in.nextInt();
-        // boolean isPrime = isPrime(prime);
+        // boolean isPrime = isPrime(prime, 2);
         // System.out.println(isPrime);
 
-        // int arr[] = { 2, 4, -3, 70, 14, 85, 12, 547, 8512, 958, 412, 0 };
-        // System.out.println(largestArr(arr));
+        int arr[] = { 2, 4, -3, 70, 14, 85, 12, 547, 8512, 958, 412, 0 };
+        System.out.println(largestArr(arr, 0, 0));
         // System.out.println(smallestArr(arr));
 
-        int num = in.nextInt();
-        reversingNum(num);
-
+        // int num = in.nextInt();
+        // System.out.println(reversingNum(num));
 
         in.close();
     }

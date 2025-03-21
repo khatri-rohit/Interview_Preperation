@@ -131,16 +131,145 @@ class Stacks {
         // String res = reverseString(str);
         // System.out.println(res);
 
-        Stack<Integer> s = new Stack<>();
-        s.push(1);
-        s.push(2);
-        s.push(3);
+        // Stack<Integer> s = new Stack<>();
+        // s.push(1);
+        // s.push(2);
+        // s.push(3);
 
-        reverseStack(s);
+        // reverseStack(s);
 
-        while (!s.isEmpty()) {
-            System.out.println(s.pop());
+        // while (!s.isEmpty()) {
+        // System.out.println(s.pop());
+        // }
+
+        // // Stock Span Problem
+        // int stock[] = { 100, 80, 60, 70, 60, 85, 100 };
+        // int span[] = new int[stock.length];
+
+        // stockSpan(stock, span);
+
+        // for (int i : span) {
+        // System.out.print(i + " | ");
+        // }
+        // System.out.println();
+
+        // // Next Greater Element
+        // int arr[] = { 6, 8, 0, 1, 3 };
+        // int nxtGreater[] = new int[arr.length];
+
+        // nextGreater(arr, nxtGreater);
+        // for (int i : nxtGreater) {
+        // System.out.print(i + " | ");
+        // }
+        // System.out.println();
+
+        // // Check Vaild
+        // String str = "()({)[]"; // false
+        // String str = "()({})[]"; // true
+        // System.out.println(isValid(str));
+
+        // // Check Duplicate
+        String str = "[a+b]";
+        System.out.println(checkDuplicate(str));
+
+    }
+
+    public static boolean checkDuplicate(String str) {
+        Stack<Character> s = new Stack<>();
+
+        if (isValid(str)) {
+            System.out.println("Not a Valid String");
+            return false;
         }
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            int count = 0;
+
+            if (ch == ')' || ch == '}' || ch == ']') {
+                while ((ch == ')' && s.peek() != '(') ||
+                        (ch == ']' && s.peek() != '[') ||
+                        (ch == '}' && s.peek() != '{') && !s.isEmpty()) {
+                    s.pop();
+                    count++;
+                }
+                if (count < 1)
+                    return true;
+                s.pop();
+            } else {
+                s.push(ch);
+            }
+        }
+        // if (!s.isEmpty()){
+        // System.out.println("Not a Valid String");
+        // return false;
+        // }
+        return false;
+    }
+
+    public static boolean isValid(String str) {
+        Stack<Character> s = new Stack<>();
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+
+            if (ch == '(' || ch == '{' || ch == '[') {
+                s.push(ch);
+            } else {
+                if (s.isEmpty())
+                    return false;
+                if ((s.peek() == '(' && ch == ')') ||
+                        (s.peek() == '[' && ch == ']') ||
+                        (s.peek() == '{' && ch == '}')) {
+                    s.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        if (!s.isEmpty())
+            return false;
+        return true;
+    }
+
+    public static void nextGreater(int arr[], int nextGreater[]) {
+        Stack<Integer> s = new Stack<>();
+
+        for (int i = arr.length - 1; i >= 0; i--) {
+            while (!s.isEmpty() && arr[s.peek()] <= arr[i]) {
+                s.pop();
+            }
+
+            if (s.isEmpty()) {
+                nextGreater[i] = -1;
+            } else {
+                nextGreater[i] = arr[s.peek()];
+            }
+
+            s.push(i);
+        }
+
+    }
+
+    public static void stockSpan(int stock[], int span[]) {
+        Stack<Integer> stack = new Stack<>();
+
+        stack.push(0);
+        span[0] = 1;
+        for (int i = 1; i < stock.length; i++) {
+            int currStock = stock[i];
+            while (!stack.isEmpty() && currStock > stock[stack.peek()]) {
+                stack.pop();
+            }
+            if (stack.isEmpty()) {
+                span[i] = i + 1;
+            } else {
+                int prevHigh = stack.peek();
+                span[i] = i - prevHigh;
+            }
+            stack.push(i);
+        }
+
     }
 
     public static void reverseStack(Stack<Integer> stack) {
