@@ -57,22 +57,31 @@ public class RecursionProblems {
         // return larg;
     }
 
-    public static int smallestArr(int arr[]) {
-        int small = Integer.MAX_VALUE;
-        for (int i : arr) {
-            if (i < small) {
-                small = i;
-            }
-        }
-        return small;
+    public static int smallestArr(int arr[], int index, int min) {
+        int idx = index;
+
+        if (arr[index] < min)
+            min = arr[index];
+
+        if (idx == arr.length - 1)
+            return min;
+        idx++;
+        return smallestArr(arr, idx, min);
+        // int small = Integer.MAX_VALUE;
+        // for (int i : arr) {
+        // if (i < small) {
+        // small = i;
+        // }
+        // }
+        // return small;
     }
 
-    public static int reversingNum(int num) {
-        if (num == 0)
-            return 0;
-        
-        int res = reversingNum(num % 10);
+    public static int reversingNum(int num, int rev) {
+        if (num <= 0)
+            return rev;
 
+        rev = rev * 10 + num % 10;
+        return reversingNum(num / 10, rev);
         // int rev = 0; // 123
         // while (num != 0) {
         // rev = (rev * 10) + (num % 10);
@@ -80,6 +89,16 @@ public class RecursionProblems {
         // }
         // System.out.println(rev);
 
+    }
+
+    public static int HCF(int a, int b, int hcf) {
+        if (hcf == 1)
+            return hcf;
+
+        if (a % hcf == 0 && b % hcf == 0)
+            return hcf;
+        hcf = hcf - 1;
+        return HCF(a, b, hcf);
     }
 
     public static void main(String[] args) {
@@ -95,16 +114,23 @@ public class RecursionProblems {
         // pow = fastPow(value, power);
         // System.out.println(pow);
 
+        // // 2. Check Prime
         // int prime = in.nextInt();
         // boolean isPrime = isPrime(prime, 2);
         // System.out.println(isPrime);
 
-        int arr[] = { 2, 4, -3, 70, 14, 85, 12, 547, 8512, 958, 412, 0 };
-        System.out.println(largestArr(arr, 0, 0));
-        // System.out.println(smallestArr(arr));
+        // // 3. 4 . Smallest & Largest in Array
+        // int arr[] = { 2, 4, -3, 70, 14, 85, 12, 547, 8512, 958, 412, 0 };
+        // System.out.println(largestArr(arr, 0, 0));
+        // System.out.println(smallestArr(arr, 0, 0));
 
+        // //5. Reverse Number
         // int num = in.nextInt();
-        // System.out.println(reversingNum(num));
+        // System.out.println(reversingNum(num, 0));
+
+        int a = 30, b = 36;
+        int min = a < b ? a : b;
+        System.out.println(HCF(a, b, min - 1));
 
         in.close();
     }
