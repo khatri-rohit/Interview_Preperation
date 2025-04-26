@@ -94,11 +94,38 @@ public class RecursionProblems {
     public static int HCF(int a, int b, int hcf) {
         if (hcf == 1)
             return hcf;
-
         if (a % hcf == 0 && b % hcf == 0)
             return hcf;
         hcf = hcf - 1;
         return HCF(a, b, hcf);
+    }
+
+    public static int LCM(int a, int b) {
+        return (a * b) / HCF(a, b, (a < b ? a : b));
+    }
+
+    public static int len(String str) {
+
+        if (str.equals(""))
+            return 0;
+        else
+            return len(str.substring(1)) + 1;
+    }
+
+    public static String removeAdjustDup(String str) {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            if (result.isEmpty()) {
+                result.append(str.charAt(i));
+            } else {
+                char last = (result.toString().toLowerCase().charAt(result.length() - 1));
+                if (str.toLowerCase().charAt(i) != last)
+                    result.append(str.charAt(i));
+            }
+        }
+
+        return result.toString();
     }
 
     public static void main(String[] args) {
@@ -128,9 +155,30 @@ public class RecursionProblems {
         // int num = in.nextInt();
         // System.out.println(reversingNum(num, 0));
 
-        int a = 30, b = 36;
-        int min = a < b ? a : b;
-        System.out.println(HCF(a, b, min - 1));
+        // // 6. 7. HC LCM
+        // int a = 3, b = 7;
+        // int min = a < b ? a : b;
+        // System.out.println(HCF(a, b, min - 1));
+        // System.out.println(LCM(a, b));
+
+        // String name = "abc";
+        // System.out.println(len(name));
+
+        // // Sum of SubArray / SubSet of an Array
+        int arr[] = { 5, 4, 3 };
+
+        // for (int i = 0; i < arr.length; i++) {
+        // int curr = arr[i];
+        // int sum = curr;
+        // for (int j = i + 1; j < arr.length; j++) {
+        // System.out.print(curr + arr[j] + " ");
+        // sum += arr[j];
+        // }
+        // System.out.println(sum);
+        // }
+
+        String str = "Rroohitt";
+        System.out.println(removeAdjustDup(str));
 
         in.close();
     }

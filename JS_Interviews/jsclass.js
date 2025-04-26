@@ -1,4 +1,4 @@
-console.log("Rohit");
+// console.log("Rohit");
 let x = null;
 console.log(x);
 
@@ -22,11 +22,11 @@ Object.values(person).forEach((value) => {
 
 const promise = new Promise((res, rej) => {
     setTimeout(() => {
-        const rand = Math.floor(Math.random() * 10);
-        if (rand > 5) {
-            res(`Success ${rand}`);
+        const r = Math.floor(Math.random() * 10);
+        if (r > 5) {
+            res(`Success ${r}`);
         } else {
-            rej(`Failed ${rand}`);
+            rej(`Failed ${r}`);
         }
     }, 1000);
 });
@@ -54,6 +54,16 @@ const BMW = new Car("BMW", 2025)
 console.log(Car.wheels);
 console.log(BMW);
 
-a = 5;
+a;
 console.log(a);
-let a = 10;
+var a = 10;
+let a = 100;
+{
+    let b = 5;
+    console.log("Rohit ", b);
+}
+console.log(b);
+
+// function rohit() {
+// }
+// rohit()
